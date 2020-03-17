@@ -14,4 +14,6 @@ public interface UsuarioService {
 
 	String deletaUsuario(Long id);
 
+	String inativarUsuario(Long id);
+
 }

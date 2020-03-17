@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.vmcorrea.teste_api.dao.CargoDao;
-import br.vmcorrea.teste_api.dao.PerfilDao;
 import br.vmcorrea.teste_api.dao.UsuarioDao;
 import br.vmcorrea.teste_api.model.Usuario;
+import br.vmcorrea.teste_api.utils.UsuarioUtils;
 import br.vmcorrea.teste_api.utils.ValidaCPF;
 
 @Service
@@ -27,18 +26,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private UsuarioDao usuarioDao;
 
-	@Autowired
-	private CargoDao cargoDao;
-
-	@Autowired
-	private PerfilDao perfilDao;
-
 	@Override
 	public String listaUsuarios() {
 
 		Iterable<Usuario> list = usuarioDao.findAll();
 
 		try {
+
 			return MAPPER.writeValueAsString(list);
 		} catch (JsonProcessingException e) {
 
@@ -51,6 +45,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public String criaUsuario(Usuario usuario) {
 
 		try {
+
+			if (UsuarioUtils.hasNull(usuario))
+				throw new NullPointerException("Campos nulos!");
+
+			if (!usuario.getStatus().equals(UsuarioUtils.STATUS_INATIVO))
+				usuario.setStatus(UsuarioUtils.STATUS_ATIVO);
 
 			String cpf = usuario.getCPF().replaceAll("[^0-9]", "");
 
@@ -70,9 +70,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		} catch (NullPointerException e) {
 
 			LOG.error(e.getMessage());
-			e.printStackTrace();
 			return "Erro ao criar usuario. Nenhum dado pode ser nulo!";
 		} catch (Exception e) {
+
 			LOG.error(e.getMessage());
 			return "Erro ao criar usuario. Verifique os dados.";
 		}
@@ -84,7 +84,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			Usuario usuarioDB = usuarioDao.findById(id).orElseThrow();
 
-			merge(usuarioDB, usuario);
+			UsuarioUtils.merge(usuarioDB, usuario);
 
 			String cpf = usuario.getCPF().replaceAll("[^0-9]", "");
 
@@ -115,30 +115,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 			LOG.error(e.getMessage());
 			return "Erro ao atualizar usuario. Verifique os dados.";
 		}
-	}
-
-	private void merge(Usuario usuarioDB, Usuario usuario) {
-
-		if (usuario.getCargo() == null)
-			usuario.setCargo(usuarioDB.getCargo());
-
-		if (usuario.getCPF() == null || usuario.getCPF().isBlank())
-			usuario.setCPF(usuarioDB.getCPF());
-
-		if (usuario.getDataDeNascimento() == null)
-			usuario.setDataDeNascimento(usuarioDB.getDataDeNascimento());
-
-		if (usuario.getNome() == null || usuario.getNome().isBlank())
-			usuario.setNome(usuarioDB.getNome());
-
-		if (usuario.getPerfil() == null)
-			usuario.setPerfil(usuarioDB.getPerfil());
-
-		if (usuario.getSexo() == null || usuario.getSexo().isBlank())
-			usuario.setSexo(usuarioDB.getSexo());
-
-		if (usuario.getStatus() == null || usuario.getStatus().isBlank())
-			usuario.setStatus(usuarioDB.getStatus());
 	}
 
 	@Override
@@ -173,4 +149,32 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 	}
 
+	@Override
+	public String inativarUsuario(Long id) {
+
+		try {
+
+			Usuario usuario = usuarioDao.findById(id).orElseThrow();
+
+			if (usuario.getStatus().equals(UsuarioUtils.STATUS_INATIVO))
+				throw new IllegalArgumentException("Usuário já está inativo!");
+			else
+				usuario.setStatus(UsuarioUtils.STATUS_INATIVO);
+
+			usuarioDao.save(usuario);
+
+			return "Usuário inativado!";
+
+		} catch (IllegalArgumentException e) {
+
+			return "Usuário já está inativo!";
+		} catch (NoSuchElementException e) {
+
+			return "Usuario não encontrado";
+		} catch (Exception e) {
+
+			LOG.error(e.getMessage());
+			return "Erro ao inativar usuário!";
+		}
+	}
 }

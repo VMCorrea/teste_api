@@ -42,4 +42,9 @@ public class UsuarioController {
 	public String deletaUsuario(@PathVariable Long id) {
 		return usuarioService.deletaUsuario(id);
 	}
+	
+	@PostMapping("/usuarios/{id}/inativar")
+	public String inativarUsuario(@PathVariable Long id) {
+		return usuarioService.inativarUsuario(id);
+	}
 }
