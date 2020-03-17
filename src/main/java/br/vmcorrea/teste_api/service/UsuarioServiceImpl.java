@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.querydsl.core.types.Predicate;
 
 import br.vmcorrea.teste_api.dao.UsuarioDao;
 import br.vmcorrea.teste_api.model.Usuario;
@@ -30,6 +31,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public String listaUsuarios() {
 
 		Iterable<Usuario> list = usuarioDao.findAll();
+
+		try {
+
+			return MAPPER.writeValueAsString(list);
+		} catch (JsonProcessingException e) {
+
+			LOG.error(e.getMessage());
+			return "Erro na serialização dos dados";
+		}
+	}
+
+	@Override
+	public String listaUsuarios(Predicate predicate) {
+
+		Iterable<Usuario> list = usuarioDao.findAll(predicate);
 
 		try {
 

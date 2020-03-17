@@ -9,18 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "USUARIO", uniqueConstraints = @UniqueConstraint(columnNames = { "NOME", "CPF" }))
+@Table(name = "USUARIO")
 public class Usuario {
 
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nome;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String cpf;
 	@Column(nullable = false)
 	private String sexo;

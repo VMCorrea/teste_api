@@ -1,5 +1,7 @@
 package br.vmcorrea.teste_api.service;
 
+import com.querydsl.core.types.Predicate;
+
 import br.vmcorrea.teste_api.model.Usuario;
 
 public interface UsuarioService {
@@ -15,5 +17,7 @@ public interface UsuarioService {
 	String deletaUsuario(Long id);
 
 	String inativarUsuario(Long id);
+
+	String listaUsuarios(Predicate predicate);
 
 }
