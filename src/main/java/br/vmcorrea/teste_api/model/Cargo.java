@@ -8,13 +8,13 @@ import javax.persistence.Table;
 @Table(name = "CARGO")
 public class Cargo {
 
-	private @Id String nome;
+	private @Id String titulo;
 
-	public String getNome() {
-		return nome;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 }
