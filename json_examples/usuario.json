@@ -1,0 +1,13 @@
+{
+	"nome": "Paulo",
+	"cpf": "119.540.460-30",
+	"dataDeNascimento": "05/06/1991",
+	"cargo": {
+		"titulo": "COORDENADOR"
+	},
+	"perfil": {
+		"titulo": "MASTER"
+	},
+	"sexo": "MASCULINO",
+	"status": "INATIVO"
+}

@@ -18,7 +18,7 @@ import br.vmcorrea.teste_api.service.UsuarioService;
 import br.vmcorrea.teste_api.utils.DataUtil;
 
 /**
- * <h1>UsuarioController</h1>
+ * UsuarioController
  * <p>
  * Classe responsável pelos enpoints relacionados a entidade Usuario
  * </p>
