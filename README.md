@@ -14,14 +14,6 @@ Para a documentação do código, foi utilizado a funcionalidade do javadoc. Os 
 # Instalação
 O projeto não requer nenhuma instalação complexa, basta ter o Java instalado na máquina.
 
-Um zip na raiz do projeto contém todos os arquivos para o funcionamento do programa, e todos devem ser extraídos no mesmo diretório:
-* Arquivo JAR executável.
-* Pasta /libs que contém todas as dependências do projeto.
-* Pasta /banco-de-dados que contém o banco de dados já configurado e com dados gravados.
-
-Esses arquivos podem ser encontrados também dentro da pasta /target.
-
-Com tudo devidamente extraído, o programa pode ser executado.
 # Uso
 ## 1. Iniciar
 Para iniciar a aplicação, basta executar o jar através de linha de comando:
