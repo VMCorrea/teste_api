@@ -18,6 +18,17 @@ import br.vmcorrea.teste_api.model.Usuario;
 import br.vmcorrea.teste_api.utils.UsuarioUtils;
 import br.vmcorrea.teste_api.utils.ValidaCPF;
 
+/**
+ * <h1>UsuarioServiceImpl</h1>
+ * <p>
+ * Implementação da Service de Usuario, com os métodos que aplicam possíveis
+ * regras de negócio e operações que se comunicam com o banco de dados.
+ * </p>
+ * 
+ * 
+ * @author Victor Corrêa
+ *
+ */
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 

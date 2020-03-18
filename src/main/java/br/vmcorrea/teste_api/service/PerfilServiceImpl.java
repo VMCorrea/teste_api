@@ -11,6 +11,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.vmcorrea.teste_api.dao.PerfilDao;
 import br.vmcorrea.teste_api.model.Perfil;
 
+/**
+ * <h1>PerfilServiceImpl</h1>
+ * <p>
+ * Implementação da Service de Perfil, com os métodos que aplicam possíveis
+ * regras de negócio e operações que se comunicam com o banco de dados.
+ * </p>
+ * 
+ * 
+ * @author Victor Corrêa
+ *
+ */
 @Service
 public class PerfilServiceImpl implements PerfilService {
 

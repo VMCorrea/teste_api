@@ -12,6 +12,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * <h1>Usuario</h1>
+ * <p>
+ * Classe que representa a entidade Usuario
+ * </p>
+ * 
+ * 
+ * @author Victor Corrêa
+ *
+ */
 @Entity
 @Table(name = "USUARIO")
 public class Usuario {
@@ -36,6 +46,8 @@ public class Usuario {
 
 	@Column(nullable = false)
 	private String status;
+
+	/* Getters & Setters */
 
 	public String getNome() {
 		return nome;

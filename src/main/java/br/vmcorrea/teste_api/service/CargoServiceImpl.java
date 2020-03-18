@@ -11,6 +11,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.vmcorrea.teste_api.dao.CargoDao;
 import br.vmcorrea.teste_api.model.Cargo;
 
+/**
+ * <h1>CargoServiceImpl</h1>
+ * <p>
+ * Implementação da Service de Cargo, com os métodos que aplicam possíveis
+ * regras de negócio e operações que se comunicam com o banco de dados.
+ * </p>
+ * 
+ * 
+ * @author Victor Corrêa
+ *
+ */
 @Service
 public class CargoServiceImpl implements CargoService {
 
@@ -47,6 +58,7 @@ public class CargoServiceImpl implements CargoService {
 
 			return "Cargo criado";
 		} catch (Exception e) {
+
 			LOG.error(e.getMessage());
 			return "Erro ao criar cargo. Verifique os dados.";
 		}

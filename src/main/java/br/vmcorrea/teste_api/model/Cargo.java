@@ -4,6 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * <h1>Cargo</h1>
+ * <p>
+ * Classe que representa a entidade Cargo
+ * </p>
+ * 
+ * 
+ * @author Victor Corrêa
+ *
+ */
 @Entity
 @Table(name = "CARGO")
 public class Cargo {
