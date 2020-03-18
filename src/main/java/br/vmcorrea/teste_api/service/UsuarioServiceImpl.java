@@ -45,7 +45,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		try {
 
-			return MAPPER.writeValueAsString(list);
+			String response = MAPPER.writeValueAsString(list);
+			LOG.info("Lista de usuario configurada.");
+			return response;
 		} catch (JsonProcessingException e) {
 
 			LOG.error(e.getMessage());
@@ -60,7 +62,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		try {
 
-			return MAPPER.writeValueAsString(list);
+			String response = MAPPER.writeValueAsString(list);
+			LOG.info("Lista de usuario configurada.");
+			return response;
 		} catch (JsonProcessingException e) {
 
 			LOG.error(e.getMessage());
@@ -89,6 +93,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			usuarioDao.save(usuario);
 
+			LOG.info("Usuário " + usuario.getNome() + " criado com sucesso.");
 			return "Usuário criado";
 		} catch (EntityNotFoundException e) {
 
@@ -125,6 +130,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			usuarioDao.save(usuario);
 
+			LOG.info("Usuário " + usuario.getNome() + " atualizado com sucesso.");
 			return "Usuário atualizado";
 		} catch (EntityNotFoundException e) {
 
@@ -150,7 +156,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		try {
 			Usuario usuarioDB = usuarioDao.findById(id).orElseThrow();
 
-			return MAPPER.writeValueAsString(usuarioDB);
+			String response = MAPPER.writeValueAsString(usuarioDB);
+			LOG.info("Usuário " + usuarioDB.getNome() + " encontrado com sucesso");
+			return response;
 		} catch (NoSuchElementException e) {
 
 			return "Usuário não encontrado!";
@@ -168,6 +176,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			usuarioDao.deleteById(id);
 
+			LOG.info("Usuário de id '" + id + "' removido com sucesso.");
 			return "Usuário removido.";
 		} catch (Exception e) {
 
@@ -190,13 +199,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 			usuarioDao.save(usuario);
 
+			LOG.info("Usuário " + usuario.getNome() + " inativado.");
 			return "Usuário inativado!";
 
 		} catch (IllegalArgumentException e) {
 
+			LOG.error(e.getMessage());
 			return "Usuário já está inativo!";
 		} catch (NoSuchElementException e) {
 
+			LOG.error(e.getMessage());
 			return "Usuario não encontrado";
 		} catch (Exception e) {
 

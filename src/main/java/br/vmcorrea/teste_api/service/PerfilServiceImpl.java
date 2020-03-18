@@ -37,7 +37,9 @@ public class PerfilServiceImpl implements PerfilService {
 		Iterable<Perfil> list = perfilDao.findAll();
 
 		try {
-			return MAPPER.writeValueAsString(list);
+			String response = MAPPER.writeValueAsString(list);
+			LOG.info("Lista de perfis configurada.");
+			return response;
 		} catch (JsonProcessingException e) {
 
 			LOG.error(e.getMessage());
@@ -56,7 +58,8 @@ public class PerfilServiceImpl implements PerfilService {
 
 			perfilDao.save(perfil);
 
-			return "Cargo criado";
+			LOG.info("Perfil " + nome + " criado com sucesso.");
+			return "Perfil criado.";
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			return "Erro ao criar cargo. Verifique os dados.";

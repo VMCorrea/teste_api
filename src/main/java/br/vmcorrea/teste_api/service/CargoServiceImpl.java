@@ -37,7 +37,10 @@ public class CargoServiceImpl implements CargoService {
 		Iterable<Cargo> list = cargoDao.findAll();
 
 		try {
-			return MAPPER.writeValueAsString(list);
+
+			String response = MAPPER.writeValueAsString(list);
+			LOG.info("Lista de cargos configurada.");
+			return response;
 		} catch (JsonProcessingException e) {
 
 			LOG.error(e.getMessage());
@@ -56,7 +59,8 @@ public class CargoServiceImpl implements CargoService {
 
 			cargoDao.save(cargo);
 
-			return "Cargo criado";
+			LOG.info("Cargo " + nome + " criado com sucesso.");
+			return "Cargo criado.";
 		} catch (Exception e) {
 
 			LOG.error(e.getMessage());
